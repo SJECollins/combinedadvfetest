@@ -24,28 +24,29 @@ const NavBar = () => {
 
     const loggedInIcons = (
         <>
-            <NavLink to="/add-item">Add Item</NavLink>
-            <NavLink to="/items">My Items</NavLink>
-            <NavLink to="/" onClick={handleSignOut}>Sign Out</NavLink>
+            <NavLink to="/add-item" className="links">Add Item</NavLink>
+            <NavLink to="/items" className="links">My Items</NavLink>
+            <NavLink to="/" onClick={handleSignOut} className="links">Sign Out</NavLink>
         </>
     )
 
     const loggedOutIcons = (
         <>
-            <NavLink to="/signin">Sign In</NavLink>
-            <NavLink to="/signup">Sign Up</NavLink>
+            <NavLink to="/signin" className="links">Sign In</NavLink>
+            <NavLink to="/signup" className="links">Sign Up</NavLink>
         </>
     )
 
     return (
-        <Navbar fixed="top">
-            <Container>
-                <NavLink to="/">
+        <Navbar fixed="top" expand="md" className="bg-body-tertiary">
+            <Container className="d-flex justify-content-between">
+                <NavLink to="/" className="links mr-1">
                     Home
                 </NavLink>
+                {currentUser && <p className="ml-1 mb-0">Hi, {currentUser.username}</p>}
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="ml-auto text-left">
+                    <Nav className="d-flex flex-lg-row justify-content-around align-items-center w-100">
                         {currentUser ? loggedInIcons : loggedOutIcons}
                     </Nav>
                 </Navbar.Collapse>

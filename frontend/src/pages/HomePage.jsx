@@ -7,18 +7,24 @@ function HomePage() {
     console.log(currentUser)
 
     return (
-        <Container>
-            <h1>Welcome to Our Todo App!</h1>
-            <p>
-                This is a simple Todo App. Please sign up or sign in to start managing your todos.
-            </p>
+        <Container className='content'>
             {!currentUser ? (
                 <div>
+                    <h1>Welcome!</h1>
+                    <p>
+                        This is a simple Todo App. Please sign up or sign in to start managing your todos.
+                    </p>
                     <Button variant="primary" href="/signup">Sign Up</Button>{' '}
                     <Button variant="secondary" href="/signin">Sign In</Button>
                 </div>
             ) : (
-                <Button variant="primary" href="/todos">View Your Todos</Button>
+                <div>
+                    <h1>Welcome back!</h1>
+                    <p>
+                        Manage your todo items:
+                    </p>
+                    <Button variant="primary" href="/todos">View Your Todos</Button>
+                </div>
             )}
         </Container>
     );

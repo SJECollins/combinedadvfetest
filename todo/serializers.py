@@ -8,7 +8,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = ["name", "items_count"]
+        fields = ["id", "name", "items_count"]
 
 
 class TodoItemSerializer(serializers.ModelSerializer):
@@ -29,4 +29,4 @@ class TodoItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TodoItem
-        fields = ["owner", "is_owner", "category", "name", "description", "created_on", "finished_on", "status"]
+        fields = ["id", "owner", "is_owner", "category", "name", "description", "created_on", "finished_on", "status"]
