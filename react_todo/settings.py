@@ -119,10 +119,6 @@ REST_FRAMEWORK = {
     "DATETIME_FORMAT": "%Y-%m-%d %H:%M",
 }
 
-REST_AUTH_SERIALIZERS = {
-    "USER_DETAILS_SERIALIZER": "plant_exchange.serializers.CurrentUserSerializer"  # noqa
-}
-
 # Configure REST_AUTH https://dj-rest-auth.readthedocs.io/en/5.0.0/configuration.html  # noqa
 REST_AUTH = {
     "USE_JWT": True,
