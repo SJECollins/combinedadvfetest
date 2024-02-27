@@ -125,6 +125,7 @@ REST_FRAMEWORK = {
 # Configure REST_AUTH https://dj-rest-auth.readthedocs.io/en/5.0.0/configuration.html  # noqa
 REST_AUTH = {
     "USE_JWT": True,
+    "JWT_AUTH_HTTPONLY": False,
     "JWT_AUTH_COOKIE": "auth-token",
     "JWT_AUTH_REFRESH_COOKIE": "refresh-token",
     "JWT_AUTH_SECURE": True,

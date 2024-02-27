@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
+import { useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
   const [signUpData, setSignUpData] = useState({
     username: "",
-    passowrd1: "",
+    password1: "",
     password2: "",
   });
 
-  const { username, passowrd1, password2 } = signUpData;
+  const { username, password1, password2 } = signUpData;
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +21,7 @@ const SignUpForm = () => {
         "/dj-rest-auth/registration/",
         signUpData
       );
+      navigate("/signin")
       console.log(data);
     } catch (err) {
       console.log(err);
@@ -32,7 +36,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <h1>Sign Up</h1>
       <label htmlFor="username">Username</label>
       <input
@@ -45,7 +49,7 @@ const SignUpForm = () => {
       <input
         type="password"
         name="password1"
-        value={passowrd1}
+        value={password1}
         onChange={handleChange}
       />
       <label htmlFor="password2">Repeat Password</label>
@@ -56,7 +60,7 @@ const SignUpForm = () => {
         onChange={handleChange}
       />
       <button type="submit">Submit</button>
-    </div>
+    </form>
   );
 };
 

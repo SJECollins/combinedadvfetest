@@ -8,7 +8,7 @@ export default defineConfig({
     server: {
         proxy: {
             "/api": {
-                target: "https://8000-sjecollins-combinedadvfe-qutfayhzjs.us2.codeanyapp.com",
+                target: "https://8000-sjecollins-combinedadvf-9z27f75w04w.ws-eu108.gitpod.io",
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/api/, ""),
             },
