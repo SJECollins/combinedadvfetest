@@ -61,6 +61,9 @@ INSTALLED_APPS = [
 
     # corsheaders
     "corsheaders",
+
+    # apps
+    "todo",
 ]
 
 MIDDLEWARE = [
