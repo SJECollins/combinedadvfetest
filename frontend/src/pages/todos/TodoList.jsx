@@ -163,6 +163,7 @@ const TodoList = () => {
         {filteredTodos.map((todo) => (
           <Col key={todo.id} sm={6} md={4} lg={3}>
             <TodoItem todo={todo} />
+            <NavLink className="btns" to={`/todo/${todo.id}`}>View</NavLink>
           </Col>
         ))}
       </Row>

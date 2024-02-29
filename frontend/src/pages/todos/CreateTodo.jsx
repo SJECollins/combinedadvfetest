@@ -113,7 +113,6 @@ const CreateTodoForm = () => {
         )}
       </Form.Group>
 
-
       <Form.Group controlId="formBasicName">
         <Form.Label>Name</Form.Label>
         <Form.Control
@@ -155,10 +154,9 @@ const CreateTodoForm = () => {
         Submit
       </Button>
     </Form>
-
-
-    <h1>New Category</h1>
+    
     <Form onSubmit={handleSubmitCat}>
+    <h1>New Category</h1>
     <Form.Group controlId="formBasicName">
         <Form.Label>Name</Form.Label>
         <Form.Control
@@ -173,7 +171,6 @@ const CreateTodoForm = () => {
         Submit
       </Button>
     </Form>
-
     </Container>
   );
 };

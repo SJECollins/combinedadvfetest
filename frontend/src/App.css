@@ -28,3 +28,20 @@ a {
   padding: 2rem;
   width: 100%;
 }
+
+form {
+  max-width: 600px !important;
+  margin: 0 auto;
+}
+
+.form-control {
+  margin-bottom: 0.5rem;
+}
+
+.btns {
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  color: white;
+  background-color: #190cc9;
+  border-radius: 6px;
+}

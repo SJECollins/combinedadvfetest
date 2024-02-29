@@ -1,5 +1,6 @@
 import React from 'react';
-import { Container, Button } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 import { useCurrentUser } from '../contexts/CurrentUserContext';
 
 function HomePage() {
@@ -13,8 +14,8 @@ function HomePage() {
                     <p>
                         This is a simple Todo App. Please sign up or sign in to start managing your todos.
                     </p>
-                    <Button variant="primary" href="/signup">Sign Up</Button>{' '}
-                    <Button variant="secondary" href="/signin">Sign In</Button>
+                    <NavLink className="btns" to="/signup">Sign Up</NavLink>{' '}
+                    <NavLink className="btns" to="/signin">Sign In</NavLink>
                 </div>
             ) : (
                 <div>
@@ -22,7 +23,7 @@ function HomePage() {
                     <p>
                         Manage your todo items:
                     </p>
-                    <Button variant="primary" href="/my-list">View Your Todos</Button>
+                    <NavLink className="btns" to="/my-list">View Your Todos</NavLink>
                 </div>
             )}
         </Container>

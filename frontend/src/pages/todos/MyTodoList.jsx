@@ -3,6 +3,7 @@ import TodoItem from "./TodoItem";
 import { axiosRes } from "../../api/axiosDefaults";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { NavLink } from "react-router-dom";
 
 const TodoList = () => {
   const [categories, setCategories] = useState([]);
@@ -140,6 +141,7 @@ const TodoList = () => {
         {filteredTodos.map((todo) => (
           <Col key={todo.id} sm={6} md={4} lg={3}>
             <TodoItem todo={todo} />
+            <NavLink className="btns" to={`/todo/${todo.id}`}>View</NavLink>
           </Col>
         ))}
       </Row>
