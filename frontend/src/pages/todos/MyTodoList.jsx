@@ -2,61 +2,53 @@ import React, { useState, useEffect } from "react";
 import TodoItem from "./TodoItem";
 import { axiosRes } from "../../api/axiosDefaults";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 const TodoList = () => {
-  const [owners, setOwners] = useState([])
-  const [categories, setCategories] = useState([])
+  const [categories, setCategories] = useState([]);
   const [todos, setTodos] = useState([]);
   const [filteredTodos, setFilteredTodos] = useState([]);
   const [filters, setFilters] = useState({
-    owner: "",
     category: "",
     status: "",
   });
   const [searchTerm, setSearchTerm] = useState("");
   const [orderBy, setOrderBy] = useState("created_on");
 
+  const currentUser = useCurrentUser()
+
   useEffect(() => {
     const fetchTodos = async () => {
       try {
-        const [{ data: todos }, { data: categories}] = await Promise.all([
-          axiosRes.get("/todoitems/"),
-          axiosRes.get("/categories/")
-        ]) 
-        setOwners(createOwners(todos))
-        setTodos(todos);
-        setCategories(categories)
-        setFilteredTodos(todos);
+        if (currentUser && currentUser.pk) {
+          const [{ data: todos }, { data: categories}] = await Promise.all([
+            axiosRes.get(`/todoitems/?owner=${currentUser.pk}`),
+            axiosRes.get("/categories/")
+          ]) ;
+          setTodos(todos);
+          setCategories(categories)
+          setFilteredTodos(todos);
+        }
       } catch (err) {
         console.log(err);
       }
     };
-
+  
     fetchTodos();
-  }, []);
+  }, [currentUser]);
 
   useEffect(() => {
     const filtered = todos.filter((todo) => {
       return (
-        todo.owner.includes(filters.owner) &&
         (filters.status === "" || todo.status == filters.status) &&
         (filters.category === "" || todo.category == filters.category) &&
         (todo.name.includes(searchTerm) ||
           todo.category_name.includes(searchTerm) ||
-          todo.owner.includes(searchTerm) ||
-          todo.description.includes(searchTerm)) 
+          todo.description.includes(searchTerm))
       );
     });
     setFilteredTodos(filtered);
   }, [todos, filters, searchTerm]);
-
-  const createOwners = (todos) => {
-    let ownerList = []
-    for (let todo of todos) {
-      if (!ownerList.includes(todo.owner)) ownerList.push(todo.owner)
-    }
-    return ownerList
-  }
 
   const handleFilterChange = (e) => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
@@ -72,7 +64,6 @@ const TodoList = () => {
 
   const resetFilters = () => {
     setFilters({
-      owner: "",
       category: "",
       status: "",
     });
@@ -83,23 +74,9 @@ const TodoList = () => {
 
   return (
     <Container className="content">
-      <h1>All Todo Items</h1>
+      <h1>My Todo Items</h1>
       <Form>
         <Row>
-          <Form.Group as={Col} controlId="formGridOwner">
-            <Form.Control
-              as="select"
-              placeholder="Owner"
-              value={filters.owner}
-              onChange={handleFilterChange}
-            >
-              <option value="">Owner</option>
-              {owners.map((own, index) => (
-                <option key={index} value={own}>{own}</option>
-              ))}
-            </Form.Control>
-          </Form.Group>
-
           <Form.Group as={Col} controlId="formGridCategory">
             <Form.Control
               as="select"

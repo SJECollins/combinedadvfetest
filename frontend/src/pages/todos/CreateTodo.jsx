@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Form, Button, Alert } from "react-bootstrap";
-import { axiosReq } from "../../api/axiosDefaults";
+import { Container, Form, Button, Alert } from "react-bootstrap";
+import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { useNavigate } from "react-router-dom";
 
 const CreateTodoForm = () => {
-  const [categories, setCategories] = useState([]); // Add categories state
+  const [categories, setCategories] = useState([]);
   const [todoData, setTodoData] = useState({
     category: "",
     name: "",
@@ -19,7 +19,7 @@ const CreateTodoForm = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const { data } = await axiosReq.get("/categories/");
+        const { data } = await axiosRes.get("/categories/");
         setCategories(data);
       } catch (err) {
         console.log(err);
@@ -34,38 +34,43 @@ const CreateTodoForm = () => {
 
     try {
       let categoryToAddId;
-
-      // Check if a new category is being added
       if (todoData.category === "new") {
-        // Create the new category
         const { data: newCategoryData } = await axiosReq.post("/categories/", {
           name: newCategory,
         });
-
-        // Get the ID of the newly created category
         categoryToAddId = newCategoryData.id;
       } else {
-        // Use the existing category ID
         categoryToAddId = todoData.category;
       }
-
-      // Submit the todo data with the category ID
       const { data } = await axiosReq.post("/todoitems/", {
         ...todoData,
         category: categoryToAddId,
       });
 
-      navigate("/");
+      navigate(-1);
     } catch (err) {
       console.log(err);
       setError(err.response?.data);
     }
   };
 
+  const handleSubmitCat = async (e) => {
+    e.preventDefault()
+
+    try {
+      const { data } = await axiosReq.post("/categories/", { name: newCategory})
+      setCategories([...categories, data])
+      navigate(-1)
+    } catch (err) {
+      console.log(err)
+      setError(err.response?.data)
+    }
+  }
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "category" && value !== "new") {
-      setNewCategory(""); // Reset new category if an existing category is selected
+      setNewCategory("");
     }
     setTodoData({
       ...todoData,
@@ -78,7 +83,8 @@ const CreateTodoForm = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit} className="content">
+    <Container className="content">
+    <Form onSubmit={handleSubmit}>
       <h1>Create Todo</h1>
       {error.non_field_errors?.map((message, index) => (
         <Alert key={index} variant="danger">{message}</Alert>
@@ -92,7 +98,6 @@ const CreateTodoForm = () => {
           onChange={handleChange}
         >
           <option value="">Select Category</option>
-          {/* Assuming categories is an array of available categories */}
           {categories.map((category) => (
             <option key={category.id} value={category.id}>{category.name}</option>
           ))}
@@ -150,6 +155,26 @@ const CreateTodoForm = () => {
         Submit
       </Button>
     </Form>
+
+
+    <h1>New Category</h1>
+    <Form onSubmit={handleSubmitCat}>
+    <Form.Group controlId="formBasicName">
+        <Form.Label>Name</Form.Label>
+        <Form.Control
+          type="text"
+          name="newCategory"
+          value={newCategory}
+          onChange={handleNewCategoryChange}
+          placeholder="Enter name"
+        />
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+    </Form>
+
+    </Container>
   );
 };
 

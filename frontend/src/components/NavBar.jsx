@@ -24,8 +24,9 @@ const NavBar = () => {
 
     const loggedInIcons = (
         <>
-            <NavLink to="/add-todo" className="links">Add Item</NavLink>
-            <NavLink to="/todo-list" className="links">My Items</NavLink>
+            <NavLink to="/add-todo" className="links">Add</NavLink>
+            <NavLink to="/todo-list" className="links">All Todos</NavLink>
+            <NavLink to="/my-list" className="links">My Todos</NavLink>
             <NavLink to="/" onClick={handleSignOut} className="links">Sign Out</NavLink>
         </>
     )

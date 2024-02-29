@@ -2,14 +2,14 @@ import React from "react";
 import { Card } from "react-bootstrap";
 
 const TodoItem = ({ todo }) => {
-  const { category, name, description, status, owner, created_on } = todo;
+  const { category, name, category_name, description, status, owner, created_on } = todo;
 
   return (
     <Card>
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Text>
-          <strong>Category:</strong> {category}
+          <strong>Category:</strong> {category_name}
         </Card.Text>
         <Card.Text>
           <strong>Description:</strong> {description}

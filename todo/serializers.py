@@ -13,6 +13,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class TodoItemSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source="owner.username")
     is_owner = serializers.SerializerMethodField()
+    category_name = serializers.ReadOnlyField(source="category.name")
 
     def get_is_owner(self, obj):
         request = self.context["request"]
@@ -20,4 +21,4 @@ class TodoItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TodoItem
-        fields = ["id", "owner", "is_owner", "category", "name", "description", "created_on", "finished_on", "status"]
+        fields = ["id", "owner", "is_owner", "category", "category_name", "name", "description", "created_on", "finished_on", "status"]

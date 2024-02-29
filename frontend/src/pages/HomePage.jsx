@@ -22,7 +22,7 @@ function HomePage() {
                     <p>
                         Manage your todo items:
                     </p>
-                    <Button variant="primary" href="/todos">View Your Todos</Button>
+                    <Button variant="primary" href="/my-list">View Your Todos</Button>
                 </div>
             )}
         </Container>

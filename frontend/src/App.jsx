@@ -8,6 +8,7 @@ import CreateCategoryForm from "./pages/categories/CreateCategory";
 import CategoryList from "./pages/categories/CategoryList";
 import CreateTodoForm from "./pages/todos/CreateTodo";
 import TodoList from "./pages/todos/TodoList";
+import MyTodoList from "./pages/todos/MyTodoList";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route exact path="/categories" element={<CategoryList />} />
         <Route exact path="/add-todo" element={<CreateTodoForm />} />
         <Route exact path="/todo-list" element={<TodoList />} />
+        <Route exact path="/my-list" element={<MyTodoList />} />
       </Routes>
     </div>
   );
