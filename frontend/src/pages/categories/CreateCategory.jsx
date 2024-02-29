@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { axiosReq } from "../../api/axiosDefaults"
-import { Button, Col, Form, Row } from "react-bootstrap"
+import { Alert, Button, Col, Form, Row } from "react-bootstrap"
 
 
 const CreateCategoryForm = () => {
@@ -44,9 +44,9 @@ const CreateCategoryForm = () => {
                         <Form.Control type="text" name="name" value={name} onChange={handleChange}/>
                     </Form.Group>
                     {errors?.name?.map((message, index) => {
-                        <div key={index}>
+                        <Alert variant="danger" key={index}>
                             {message}
-                        </div>
+                        </Alert>
                     })}
                     <Button className="secondary" onClick={() => navigate(-1)}>Cancel</Button>
                     <Button className="primary" type="submit">Add</Button>

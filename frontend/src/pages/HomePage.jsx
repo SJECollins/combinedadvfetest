@@ -4,7 +4,6 @@ import { useCurrentUser } from '../contexts/CurrentUserContext';
 
 function HomePage() {
     const currentUser = useCurrentUser();
-    console.log(currentUser)
 
     return (
         <Container className='content'>

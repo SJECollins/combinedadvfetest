@@ -45,7 +45,7 @@ class TodoItemList(generics.ListCreateAPIView):
         DjangoFilterBackend
     ]
     filterset_fields = [
-        "owner"
+        "owner",
         "category",
         "status"
     ]
