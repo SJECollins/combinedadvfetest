@@ -132,6 +132,15 @@ REST_AUTH = {
     "JWT_AUTH_SAMESITE": "None",
 }
 
+# Allauth
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+DEFAULT_FROM_EMAIL = "test@testemail.com"
+LOGIN_URL = os.environ["FRONTEND_URL"]
+
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

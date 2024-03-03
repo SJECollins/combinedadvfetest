@@ -6,10 +6,11 @@ import { useNavigate } from "react-router-dom";
 const SignUpForm = () => {
   const [signUpData, setSignUpData] = useState({
     username: "",
+    email: "",
     password1: "",
     password2: "",
   });
-  const { username, password1, password2 } = signUpData;
+  const { username, email, password1, password2 } = signUpData;
   const [error, setError] = useState({});
 
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const SignUpForm = () => {
 
     try {
       const { data } = await axiosReq.post("/dj-rest-auth/registration/", signUpData);
+      console.log(data)
       navigate("/signin");
     } catch (err) {
       console.log(err);
@@ -49,6 +51,20 @@ const SignUpForm = () => {
           placeholder="Enter username"
         />
         {error.username?.map((message, index) => (
+          <Alert key={index} variant="danger">{message}</Alert>
+        ))}
+      </Form.Group>
+
+      <Form.Group controlId="formBasicEmail">
+        <Form.Label>Email</Form.Label>
+        <Form.Control
+          type="text"
+          name="email"
+          value={email}
+          onChange={handleChange}
+          placeholder="Enter email"
+        />
+        {error.email?.map((message, index) => (
           <Alert key={index} variant="danger">{message}</Alert>
         ))}
       </Form.Group>
